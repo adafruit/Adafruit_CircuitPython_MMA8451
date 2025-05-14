@@ -28,14 +28,15 @@ Implementation Notes
   https://github.com/adafruit/Adafruit_CircuitPython_BusDevice
 
 """
+
 import struct
 
-from micropython import const
-
 from adafruit_bus_device import i2c_device
+from micropython import const
 
 try:
     from typing import Optional, Tuple
+
     from busio import I2C
 except ImportError:
     pass
@@ -140,9 +141,7 @@ class MMA8451:
         # Activate at max rate, low noise mode
         self._write_u8(_MMA8451_REG_CTRL_REG1, 0x01 | 0x04)
 
-    def _read_into(
-        self, address: int, buf: bytearray, count: Optional[int] = None
-    ) -> bytearray:
+    def _read_into(self, address: int, buf: bytearray, count: Optional[int] = None) -> bytearray:
         # Read bytes from the specified address into the provided buffer.
         # If count is not specified (the default) the entire buffer is filled,
         # otherwise only count bytes are copied in.
@@ -150,7 +149,7 @@ class MMA8451:
         # has at least 1 value.  I don't trust the implicit true/false
         # recommendation as it was not designed for bytearrays which may not
         # follow that semantic.  Ignore pylint's superfulous complaint.
-        assert len(buf) > 0  # pylint: disable=len-as-condition
+        assert len(buf) > 0
         if count is None:
             count = len(buf)
         with self._device as i2c:
@@ -214,7 +213,6 @@ class MMA8451:
 
     @property
     def acceleration(self) -> Tuple[float, float, float]:
-        # pylint: disable=no-else-return
         # This needs to be refactored when it can be tested
         """Get the acceleration measured by the sensor.  Will return a 3-tuple
         of X, Y, Z axis acceleration values in :math:`m/s^2`.

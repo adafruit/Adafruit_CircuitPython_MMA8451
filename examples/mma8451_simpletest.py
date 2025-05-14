@@ -4,9 +4,10 @@
 # Simple demo of reading the MMA8451 orientation every second.
 
 import time
-import board
-import adafruit_mma8451
 
+import board
+
+import adafruit_mma8451
 
 # Create sensor object, communicating over the board's default I2C bus
 i2c = board.I2C()  # uses board.SCL and board.SDA
@@ -35,9 +36,7 @@ sensor = adafruit_mma8451.MMA8451(i2c)
 # Main loop to print the acceleration and orientation every second.
 while True:
     x, y, z = sensor.acceleration
-    print(
-        "Acceleration: x={0:0.3f}m/s^2 y={1:0.3f}m/s^2 z={2:0.3f}m/s^2".format(x, y, z)
-    )
+    print(f"Acceleration: x={x:0.3f}m/s^2 y={y:0.3f}m/s^2 z={z:0.3f}m/s^2")
     orientation = sensor.orientation
     # Orientation is one of these values:
     #  - PL_PUF: Portrait, up, front

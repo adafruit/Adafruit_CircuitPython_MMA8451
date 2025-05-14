@@ -4,10 +4,12 @@
 # SPDX-License-Identifier: MIT
 
 import time
+
 import board
 from adafruit_display_text.bitmap_label import Label
-from terminalio import FONT
 from displayio import Group
+from terminalio import FONT
+
 import adafruit_mma8451
 
 # Simple demo of using the built-in display.
@@ -38,8 +40,6 @@ board.DISPLAY.root_group = main_group
 while True:
     # update the text of the label(s) to show the sensor readings
     x, y, z = sensor.acceleration
-    display_output_label.text = (
-        f"Acceleration:\nx={x:0.3f}m/s^2\ny={y:0.3f}m/s^2\nz={z:0.3f}m/s^2"
-    )
+    display_output_label.text = f"Acceleration:\nx={x:0.3f}m/s^2\ny={y:0.3f}m/s^2\nz={z:0.3f}m/s^2"
     # wait for a bit
     time.sleep(0.5)
